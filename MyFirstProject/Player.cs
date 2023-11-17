@@ -1,14 +1,14 @@
 ﻿namespace MyFirstProject
 {
-    public abstract class Footballer
+    public abstract class Player
     {
-        public Footballer(string nickname, string country)
+        public Player(string nickname, string country)
         {
             this.Nickname = nickname;
             this.Country = country;
         }
 
-        public Footballer(string name, string surname, string country)
+        public Player(string name, string surname, string country)
         {
             this.Name = name;
             this.Surname = surname;
