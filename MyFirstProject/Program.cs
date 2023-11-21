@@ -1,4 +1,6 @@
-﻿Console.WriteLine("*****************************************");
+﻿using MyFirstProject;
+
+Console.WriteLine("*****************************************");
 Console.WriteLine("************** FC STAT v1.0 *************");
 Console.WriteLine("*****************************************");
 Console.WriteLine("by Indywidualista");
@@ -15,7 +17,22 @@ Console.Clear();
 Console.WriteLine("kryteria takie jak:");
 Console.WriteLine();
 Console.WriteLine(" ~ strzelone bramki = (+10 pkt)\n ~ asysty = (+5 pkt)\n ~ żółta kartka = (-5 pkt)\n ~ czerwona kartka = (-15 pkt)");
+Console.WriteLine();
+Console.WriteLine("minimalna ocena ogólna to 0\nnp. jeśli dodamy bramkę (+10) i czerwoną kartkę (-15) to ocena ogólna bedzie 0");
+Console.WriteLine();
+Console.WriteLine("Podaj imię zawodnika:");
+var name = Console.ReadLine();
+Console.WriteLine();
+Console.WriteLine("Podaj nazwisko zawodnika:");
+var surname = Console.ReadLine();
+Console.WriteLine();
+Console.WriteLine("Podaj kraj zawodnika:");
+var country = Console.ReadLine();
 
-
-
-
+var player = new Player(name, surname, country);
+Console.WriteLine("-------------------------");
+Console.WriteLine("Wybierz opcje co chcesz dodać do statystyk zawodnika:");
+Console.WriteLine();
+Console.WriteLine("1. BRAMKA");
+Console.WriteLine("2. ŻÓŁTA KARTKA");
+Console.WriteLine("3. CZERWONA KARTKA");
