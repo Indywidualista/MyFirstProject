@@ -11,47 +11,82 @@ Console.WriteLine();
 Console.WriteLine("po przez parę kryteriów które wpływają na jego ocenę ogólną");
 Console.WriteLine();
 Console.WriteLine();
-Console.WriteLine("        Naciśnij każdy klawisz żeby kontynuować...");
+Console.WriteLine("        Naciśnij dowolny klawisz żeby kontynuować...");
 Console.ReadKey(true);
 Console.Clear();
-Console.WriteLine("kryteria takie jak:");
-Console.WriteLine();
-Console.WriteLine(" ~ strzelone bramki = (+10 pkt)\n ~ asysty = (+5 pkt)\n ~ żółta kartka = (-5 pkt)\n ~ czerwona kartka = (-15 pkt)");
-Console.WriteLine();
-Console.WriteLine("minimalna ocena ogólna to 0\nnp. jeśli dodamy bramkę (+10) i czerwoną kartkę (-15) to ocena ogólna bedzie 0");
-Console.WriteLine();
-
-List<string> footballerData = new List<string>();
-Console.WriteLine("Podaj imię zawodnika:");
-var name = Console.ReadLine();
-footballerData.Add(name);
-Console.WriteLine();
-Console.WriteLine("Podaj nazwisko zawodnika:");
-var surname = Console.ReadLine();
-footballerData.Add(surname);
-Console.WriteLine();
-Console.WriteLine("Podaj kraj zawodnika:");
-var country = Console.ReadLine();
-footballerData.Add(country);
 
 
-while (true)
+Starter();
+void Starter()
 {
-    Console.WriteLine("-------------------------");
-    Console.WriteLine("Wybierz opcje co chcesz dodać do statystyk zawodnika:");
-    Console.WriteLine();
-    Console.WriteLine("1. BRAMKA\n2. ŻÓŁTA KARTKA\n3. CZERWONA KARTKA\n4. WYJŚCIE Z APLIKACJI");
-    var input = Console.ReadLine();
-
-    if (input == "4")
+    ScoringTable();
+    StartProgram();
+}
+    
+void StartProgram()
+{
+    ShowMenu();
+    while (true)
     {
-        break;
+        var input = Console.ReadLine()!;
+        var inputUpper = input.ToUpper();
+
+        switch (inputUpper)
+        {
+            case "Q":
+                SetPlayerData();
+                break;
+
+            case "W":
+                ShowPlayerInfo();  // jak to naprawić ?
+                break;
+
+            case "E":
+                Environment.Exit(0);
+                break;
+
+            default:
+                Console.WriteLine("Nie wybrano żadnej opcji!");
+                continue;
+        }
     }
-
-
 }
 
-Console.WriteLine("\nWprowadzone dane piłkarza:");
-Console.WriteLine($"Imię: {footballerData[0]}");
-Console.WriteLine($"Nazwisko: {footballerData[1]}");
-Console.WriteLine($"Kraj: {footballerData[2]}");
+void ShowPlayerInfo(Player player)
+{
+    Console.WriteLine("\nWprowadzone dane piłkarza:");
+    Console.WriteLine($"Imię: {player.Name}");
+    Console.WriteLine($"Nazwisko: {player.Surname} ");
+    Console.WriteLine($"Kraj: {player.Country} ");
+}
+
+static void ShowMenu()
+{
+    Console.WriteLine("naciśnij ==> Q żeby dodać piłkarza i go ocenić ");
+    Console.WriteLine("naciśnij ==> W żeby wyświetlić dane piłkarza ");
+    Console.WriteLine("naciśnij ==> E żeby zamknąć aplikację");
+}
+void SetPlayerData()
+{
+    Player player = new Player();
+    Console.WriteLine();
+    Console.WriteLine("Podaj imię zawodnika:");
+    player.SetName();
+    
+    Console.WriteLine();
+    Console.WriteLine("Podaj nazwisko zawodnika:");
+    player.SetSurname();
+   
+    Console.WriteLine();
+    Console.WriteLine("Podaj kraj zawodnika:");
+    player.SetCountry();
+    
+}
+
+static void ScoringTable()
+{
+    Console.WriteLine(" ~ strzelone bramki = (+10 pkt)\n ~ asysty = (+5 pkt)\n ~ żółta kartka = (-5 pkt)\n ~ czerwona kartka = (-15 pkt)");
+    Console.WriteLine();
+    Console.WriteLine("minimalna ocena ogólna to 0\nnp. jeśli dodamy bramkę (+10) i czerwoną kartkę (-15) to ocena ogólna bedzie 0");
+    Console.WriteLine();
+}
