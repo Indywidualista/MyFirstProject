@@ -1,9 +1,11 @@
 ﻿namespace MyFirstProject
+
 {
     public class Player
     {
+        public static bool playerAdded = false;
         private int Score;
-
+        
         public Player()
         {
             this.Name = "";

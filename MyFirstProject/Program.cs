@@ -1,4 +1,5 @@
 ﻿using MyFirstProject;
+using System.Numerics;
 
 Console.WriteLine("*****************************************");
 Console.WriteLine("************** FC STAT v1.0 *************");
@@ -17,47 +18,64 @@ Console.Clear();
 
 
 Starter();
-void Starter()
+static void Starter()
 {
     ScoringTable();
+    ShowMenu();
     StartProgram();
 }
-    
-void StartProgram()
+
+
+
+static void StartProgram()
 {
-    ShowMenu();
+    Player currentPlayer = null;
     while (true)
     {
         var input = Console.ReadLine()!;
         var inputUpper = input.ToUpper();
 
-        switch (inputUpper)
+        if (inputUpper == "Q" && Player.playerAdded)
         {
-            case "Q":
-                SetPlayerData();
-                break;
+            Console.WriteLine($"Zawodnik został już dodany. Nie można ponownie dodać");
+        }
+        else
+        {
+            switch (inputUpper)
+            {
+                case "Q":
+                    currentPlayer = SetPlayerData();
+                    break;
 
-            case "W":
-                ShowPlayerInfo();  // jak to naprawić ?
-                break;
+                case "W":
+                    ShowPlayerInfo(currentPlayer);
+                    break;
 
-            case "E":
-                Environment.Exit(0);
-                break;
+                case "E":
+                    Environment.Exit(0);
+                    break;
 
-            default:
-                Console.WriteLine("Nie wybrano żadnej opcji!");
-                continue;
+                default:
+                    Console.WriteLine("Nie wybrano żadnej opcji!");
+                    continue;
+            }
         }
     }
 }
 
-void ShowPlayerInfo(Player player)
+static void ShowPlayerInfo(Player player)
 {
-    Console.WriteLine("\nWprowadzone dane piłkarza:");
-    Console.WriteLine($"Imię: {player.Name}");
-    Console.WriteLine($"Nazwisko: {player.Surname} ");
-    Console.WriteLine($"Kraj: {player.Country} ");
+    if (player != null)
+    {
+        Console.WriteLine("\nWprowadzone dane piłkarza:");
+        Console.WriteLine($"Imię: {player.Name}");
+        Console.WriteLine($"Nazwisko: {player.Surname} ");
+        Console.WriteLine($"Kraj: {player.Country} ");
+    }
+    else
+    {
+        Console.WriteLine("Nie wprowadzono jeszcze danych piłkarza");
+    }
 }
 
 static void ShowMenu()
@@ -66,7 +84,7 @@ static void ShowMenu()
     Console.WriteLine("naciśnij ==> W żeby wyświetlić dane piłkarza ");
     Console.WriteLine("naciśnij ==> E żeby zamknąć aplikację");
 }
-void SetPlayerData()
+static Player SetPlayerData()
 {
     Player player = new Player();
     Console.WriteLine();
@@ -80,7 +98,13 @@ void SetPlayerData()
     Console.WriteLine();
     Console.WriteLine("Podaj kraj zawodnika:");
     player.SetCountry();
-    
+    Console.WriteLine();
+    ShowMenuAfterAddPlayer();
+    Player.playerAdded = true;
+    // dodać metode która pokaże dalsze opcję po odpowiedzi na ostatnie pytanie (o kraj)
+    // dodać event kótóry powiadamia o dodaniu piłkarza
+    return player;
+
 }
 
 static void ScoringTable()
@@ -89,4 +113,10 @@ static void ScoringTable()
     Console.WriteLine();
     Console.WriteLine("minimalna ocena ogólna to 0\nnp. jeśli dodamy bramkę (+10) i czerwoną kartkę (-15) to ocena ogólna bedzie 0");
     Console.WriteLine();
+}
+static void ShowMenuAfterAddPlayer()
+{
+    Console.WriteLine("naciśnij ==> W żeby wyświetlić dane piłkarza ");
+    Console.WriteLine("naciśnij ==> E żeby zamknąć aplikację");
+
 }
