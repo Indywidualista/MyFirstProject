@@ -25,8 +25,6 @@ static void Starter()
     StartProgram();
 }
 
-
-
 static void StartProgram()
 {
     Player currentPlayer = null;
@@ -71,6 +69,8 @@ static void ShowPlayerInfo(Player player)
         Console.WriteLine($"Imię: {player.Name}");
         Console.WriteLine($"Nazwisko: {player.Surname} ");
         Console.WriteLine($"Kraj: {player.Country} ");
+        Console.WriteLine();
+        ShowMenuAfterAddPlayer();
     }
     else
     {
@@ -86,6 +86,7 @@ static void ShowMenu()
 }
 static Player SetPlayerData()
 {
+    ScoreInFile scoreInFile = new ScoreInFile();
     Player player = new Player();
     Console.WriteLine();
     Console.WriteLine("Podaj imię zawodnika:");
@@ -99,9 +100,16 @@ static Player SetPlayerData()
     Console.WriteLine("Podaj kraj zawodnika:");
     player.SetCountry();
     Console.WriteLine();
+
+    Console.WriteLine("Podaj ilość żółtych kartek zdobytych w meczu:");
+    scoreInFile.AddYellowCard();
+    Console.WriteLine();
+
+    Console.WriteLine("Podaj ilośc czerwonych kartek:");
+    scoreInFile.AddRedCard();
+    Console.WriteLine();
     ShowMenuAfterAddPlayer();
     Player.playerAdded = true;
-    // dodać metode która pokaże dalsze opcję po odpowiedzi na ostatnie pytanie (o kraj)
     // dodać event kótóry powiadamia o dodaniu piłkarza
     return player;
 

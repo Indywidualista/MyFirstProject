@@ -2,7 +2,7 @@
 
 namespace MyFirstProject
 {
-    internal interface IFootballer
+    public interface IFootballer
     {
         string Name { get; }
         string Surname { get; }
