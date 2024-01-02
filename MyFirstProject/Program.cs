@@ -1,5 +1,7 @@
 ﻿using MyFirstProject;
 using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 Console.WriteLine("*****************************************");
 Console.WriteLine("************** FC STAT v1.0 *************");
@@ -16,7 +18,6 @@ Console.WriteLine("        Naciśnij dowolny klawisz żeby kontynuować...");
 Console.ReadKey(true);
 Console.Clear();
 
-
 Starter();
 static void Starter()
 {
@@ -28,6 +29,8 @@ static void Starter()
 static void StartProgram()
 {
     Player currentPlayer = null;
+    ScoreInFile scoreInFile = new ScoreInFile();
+
     while (true)
     {
         var input = Console.ReadLine()!;
@@ -50,6 +53,14 @@ static void StartProgram()
                     break;
 
                 case "E":
+                    Console.WriteLine("\nStatystyki:");
+                    Console.WriteLine($"Gole: ");
+                    Console.WriteLine($"Asysty: ");
+                    Console.WriteLine($"Żółte kartki: {scoreInFile.Ycard}");
+                    Console.WriteLine($"Czerwone kartki: {scoreInFile.Rcard}");
+                    break;
+
+                case "R":
                     Environment.Exit(0);
                     break;
 
@@ -61,11 +72,13 @@ static void StartProgram()
     }
 }
 
+
 static void ShowPlayerInfo(Player player)
 {
     if (player != null)
     {
         Console.WriteLine("\nWprowadzone dane piłkarza:");
+        Console.WriteLine();
         Console.WriteLine($"Imię: {player.Name}");
         Console.WriteLine($"Nazwisko: {player.Surname} ");
         Console.WriteLine($"Kraj: {player.Country} ");
@@ -77,12 +90,12 @@ static void ShowPlayerInfo(Player player)
         Console.WriteLine("Nie wprowadzono jeszcze danych piłkarza");
     }
 }
-
 static void ShowMenu()
 {
     Console.WriteLine("naciśnij ==> Q żeby dodać piłkarza i go ocenić ");
     Console.WriteLine("naciśnij ==> W żeby wyświetlić dane piłkarza ");
-    Console.WriteLine("naciśnij ==> E żeby zamknąć aplikację");
+    Console.WriteLine("naciśnij ==> E żeby wyświetlić statystyki piłkarza ");
+    Console.WriteLine("naciśnij ==> R żeby zamknąć aplikację");
 }
 static Player SetPlayerData()
 {
@@ -91,11 +104,11 @@ static Player SetPlayerData()
     Console.WriteLine();
     Console.WriteLine("Podaj imię zawodnika:");
     player.SetName();
-    
+
     Console.WriteLine();
     Console.WriteLine("Podaj nazwisko zawodnika:");
     player.SetSurname();
-   
+
     Console.WriteLine();
     Console.WriteLine("Podaj kraj zawodnika:");
     player.SetCountry();
@@ -103,16 +116,23 @@ static Player SetPlayerData()
 
     Console.WriteLine("Podaj ilość żółtych kartek zdobytych w meczu:");
     scoreInFile.AddYellowCard();
+    int yellowCards = scoreInFile.Ycard;
     Console.WriteLine();
 
-    Console.WriteLine("Podaj ilośc czerwonych kartek:");
-    scoreInFile.AddRedCard();
+    if (yellowCards < 2)
+    {
+        Console.WriteLine("Podaj ilośc czerwonych kartek:");
+        scoreInFile.AddRedCard();
+        Console.WriteLine();
+    }
+    else
+    {
+        Console.WriteLine("Nie możesz dodać czerwonej kartki, ponieważ piłkarz już zdobył dwie żółte kartki");
+    }
     Console.WriteLine();
     ShowMenuAfterAddPlayer();
     Player.playerAdded = true;
-    // dodać event kótóry powiadamia o dodaniu piłkarza
-    return player;
-
+    return player;   
 }
 
 static void ScoringTable()
@@ -125,6 +145,7 @@ static void ScoringTable()
 static void ShowMenuAfterAddPlayer()
 {
     Console.WriteLine("naciśnij ==> W żeby wyświetlić dane piłkarza ");
-    Console.WriteLine("naciśnij ==> E żeby zamknąć aplikację");
+    Console.WriteLine("naciśnij ==> E żeby wyświetlić statystyki piłkarza ");
+    Console.WriteLine("naciśnij ==> R żeby zamknąć aplikację");
 
 }

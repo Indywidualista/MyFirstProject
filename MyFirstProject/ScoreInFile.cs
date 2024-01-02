@@ -2,32 +2,63 @@
 {
     public class ScoreInFile
     {
-        int goals = 0;
-        int assist = 0;
-        int ycard = 0;
-        int rcard = 0;
+        public ScoreInFile()
+        {
+            this.Goals = 0;
+            this.Assist = 0;
+            this.Ycard = 0;
+            this.Rcard = 0;
+
+        }
+        public ScoreInFile(int goals, int assist, int ycard, int rcard)
+        {
+            this.Goals = goals;
+            this.Assist = assist;
+            this.Ycard = ycard;
+            this.Rcard = rcard;
+
+        }
+
+        public int Goals {get; set;}
+        public int Assist { get; set;}
+        public int Ycard { get; set;}
+        public int Rcard {  get; set;}
 
         public void AddGoals()
         {
-            goals++;
+            this.Goals++;
         }
         public void AddAssist()
         {
-            assist++;
+            this.Assist++;
         }
         public void AddYellowCard()
         {
-            int yellowCardCount = int.Parse(Console.ReadLine());
-            ycard += yellowCardCount;
-            if (ycard >=2 )
+            this.Ycard = int.Parse(Console.ReadLine());
+            if (Ycard >=2 )
             {
-                AddRedCard();
+                this.Rcard++;
             }
         }
         public void AddRedCard()
         {
-            int redCardCount = int.Parse(Console.ReadLine());
-            rcard += redCardCount;
+            this.Rcard = int.Parse(Console.ReadLine());
+            
+        }
+        public void ShowPlayerStat(ScoreInFile scoreInFile)
+        {
+            if (scoreInFile != null)
+            {
+                Console.WriteLine("\nStatystyki:");
+                Console.WriteLine($"Gole: ");
+                Console.WriteLine($"Asysty: ");
+                Console.WriteLine($"Żółte kartki: {scoreInFile.Ycard}");
+                Console.WriteLine($"Czerwone kartki: {scoreInFile.Rcard}");
+            }
+            else
+            {
+                Console.WriteLine("Nie wprowadzono statystyk piłkarza");
+            }            
         }
     }
 }
