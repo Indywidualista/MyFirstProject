@@ -1,7 +1,4 @@
 ﻿using MyFirstProject;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 
 Console.WriteLine("*****************************************");
 Console.WriteLine("************** FC STAT v1.0 *************");
@@ -29,7 +26,7 @@ static void Starter()
 static void StartProgram()
 {
     Player currentPlayer = null;
-    ScoreInFile scoreInFile = new ScoreInFile();
+    ScoreInFile scoreInFileInstance = new ScoreInFile();
 
     while (true)
     {
@@ -45,7 +42,8 @@ static void StartProgram()
             switch (inputUpper)
             {
                 case "Q":
-                    currentPlayer = SetPlayerData();
+                    Console.Clear();
+                    currentPlayer = SetPlayerDataStat();
                     break;
 
                 case "W":
@@ -53,11 +51,7 @@ static void StartProgram()
                     break;
 
                 case "E":
-                    Console.WriteLine("\nStatystyki:");
-                    Console.WriteLine($"Gole: ");
-                    Console.WriteLine($"Asysty: ");
-                    Console.WriteLine($"Żółte kartki: {scoreInFile.Ycard}");
-                    Console.WriteLine($"Czerwone kartki: {scoreInFile.Rcard}");
+                    ScoreInFile.ShowPlayerStat(scoreInFileInstance);
                     break;
 
                 case "R":
@@ -71,8 +65,6 @@ static void StartProgram()
         }
     }
 }
-
-
 static void ShowPlayerInfo(Player player)
 {
     if (player != null)
@@ -97,7 +89,7 @@ static void ShowMenu()
     Console.WriteLine("naciśnij ==> E żeby wyświetlić statystyki piłkarza ");
     Console.WriteLine("naciśnij ==> R żeby zamknąć aplikację");
 }
-static Player SetPlayerData()
+static Player SetPlayerDataStat()
 {
     ScoreInFile scoreInFile = new ScoreInFile();
     Player player = new Player();
@@ -112,8 +104,16 @@ static Player SetPlayerData()
     Console.WriteLine();
     Console.WriteLine("Podaj kraj zawodnika:");
     player.SetCountry();
-    Console.WriteLine();
 
+    Console.WriteLine();
+    Console.WriteLine("Podaj ilość zdoytych goli przez zawodnika:");
+    scoreInFile.AddGoals();
+
+    Console.WriteLine();
+    Console.WriteLine("Podaj ilość asyst:");
+    scoreInFile.AddAssist();
+
+    Console.WriteLine();
     Console.WriteLine("Podaj ilość żółtych kartek zdobytych w meczu:");
     scoreInFile.AddYellowCard();
     int yellowCards = scoreInFile.Ycard;
@@ -132,7 +132,7 @@ static Player SetPlayerData()
     Console.WriteLine();
     ShowMenuAfterAddPlayer();
     Player.playerAdded = true;
-    return player;   
+    return player;
 }
 
 static void ScoringTable()

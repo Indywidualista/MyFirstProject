@@ -3,8 +3,7 @@
 {
     public class Player
     {
-        public static bool playerAdded = false;
-        private int Score;
+        public static bool playerAdded = false;       
         
         public Player()
         {
@@ -17,15 +16,13 @@
         {
             this.Nickname = nickname;
             this.Country = country;
-            this.Score = 0;
         }
 
         public Player(string name, string surname, string country)
         {
             this.Name = name;
             this.Surname = surname;
-            this.Country = country;
-            this.Score = 0;
+            this.Country = country;           
         }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -44,6 +41,5 @@
         {
             this.Country = Console.ReadLine();
         }
-
     }
 }
