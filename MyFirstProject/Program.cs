@@ -25,8 +25,8 @@ static void Starter()
 
 static void StartProgram()
 {
-    Player currentPlayer = null;
-    ScoreInFile scoreInFileInstance = new ScoreInFile();
+    Player currentPlayer = null; 
+    ScoreInFile scoreInFile = new ScoreInFile();
 
     while (true)
     {
@@ -43,7 +43,7 @@ static void StartProgram()
             {
                 case "Q":
                     Console.Clear();
-                    currentPlayer = SetPlayerDataStat();
+                    currentPlayer = SetPlayerDataStatistic();
                     break;
 
                 case "W":
@@ -51,7 +51,7 @@ static void StartProgram()
                     break;
 
                 case "E":
-                    ScoreInFile.ShowPlayerStat(scoreInFileInstance);
+                    ScoreInFile.ShowPlayerStat(scoreInFile);
                     break;
 
                 case "R":
@@ -89,7 +89,7 @@ static void ShowMenu()
     Console.WriteLine("naciśnij ==> E żeby wyświetlić statystyki piłkarza ");
     Console.WriteLine("naciśnij ==> R żeby zamknąć aplikację");
 }
-static Player SetPlayerDataStat()
+static Player SetPlayerDataStatistic()
 {
     ScoreInFile scoreInFile = new ScoreInFile();
     Player player = new Player();
@@ -106,7 +106,7 @@ static Player SetPlayerDataStat()
     player.SetCountry();
 
     Console.WriteLine();
-    Console.WriteLine("Podaj ilość zdoytych goli przez zawodnika:");
+    Console.WriteLine("Podaj ilość zdoytych goli przez zawodnika:");                       // nie zapamiętuje goli i asyst po zakończeniu metody SetPlayerDataStatistic
     scoreInFile.AddGoals();
 
     Console.WriteLine();
@@ -147,5 +147,4 @@ static void ShowMenuAfterAddPlayer()
     Console.WriteLine("naciśnij ==> W żeby wyświetlić dane piłkarza ");
     Console.WriteLine("naciśnij ==> E żeby wyświetlić statystyki piłkarza ");
     Console.WriteLine("naciśnij ==> R żeby zamknąć aplikację");
-
 }

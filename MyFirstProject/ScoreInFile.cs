@@ -10,7 +10,6 @@ namespace MyFirstProject
             this.Ycard = 0;
             this.Rcard = 0;
         }
-
         public int Goals { get; set; }
         public int Assist { get; set; }
         public int Ycard { get; set; }
